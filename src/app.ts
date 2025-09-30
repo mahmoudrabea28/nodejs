@@ -1,4 +1,4 @@
-import express, { Response, RequestHandler, Request } from 'express';
+import express, { Response, RequestHandler } from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import crudService from './service';
@@ -48,24 +48,6 @@ app.use((req, res, next) => {
  * Path: /auth/:model
  * Method: POST
  */
-
-// رسالة صحّة واضحة JSON
-app.get('/api/health', (_req, res) => {
-  res.status(200).json({
-    ok: true,
-    name: 'testbranch-server-ts',
-    env: process.env.VERCEL ? 'vercel' : 'local',
-    time: new Date().toISOString(),
-  });
-});
-
-// رسالة نصية على الجذر /
-app.get('/', (_req, res) => {
-  res.type('text/plain').status(200)
-     .send('✅ Project deployed successfully on Vercel (Express + TS)');
-});
-
-
 app.post('/auth/:model', async (req, res) => {
     try {
         // Authenticate the user and return data.
@@ -207,13 +189,7 @@ app.delete('/api/:model/:id', async (req: AuthenticatedRequest, res: Response) =
         res.status(500).json({ message: error.message });
     }
 });
-// في الآخر
-if (!process.env.VERCEL) {
-  const PORT = process.env.PORT || 4444;
-  app.listen(PORT, () => console.log(`Server on ${PORT}`));
-}
-export default app;
 
-
-
-
+// Start the Express server.
+const PORT = process.env.PORT || 4444;
+app.listen(PORT, () => console.log(`Node.js server running on port ${PORT}`));
