@@ -191,5 +191,7 @@ app.delete('/api/:model/:id', async (req: AuthenticatedRequest, res: Response) =
 });
 
 // Start the Express server.
-const PORT = process.env.PORT || 4444;
-app.listen(PORT, () => console.log(`Node.js server running on port ${PORT}`));
+if (!process.env.VERCEL) {
+  const PORT = process.env.PORT || 4444;
+  app.listen(PORT, () => console.log(`Server on ${PORT}`));
+}
