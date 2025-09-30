@@ -1,8 +1,4 @@
 {
-  "functions": {
-    "api/index.ts": { "runtime": "nodejs18.x" }
-  },
-  "routes": [
-    { "src": "^/$", "dest": "/api/index.ts" }
-  ]
+  "functions": { "api/index.ts": { "runtime": "nodejs18.x" } },
+  "routes": [{ "src": "^/$", "dest": "/api/index.ts" }]
 }

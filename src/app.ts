@@ -49,9 +49,22 @@ app.use((req, res, next) => {
  * Method: POST
  */
 
-app.get("/api/health", (_req: Request, res: Response) => {
-  res.status(200).send("✅ OK (Vercel + Express)");
+// رسالة صحّة واضحة JSON
+app.get('/api/health', (_req, res) => {
+  res.status(200).json({
+    ok: true,
+    name: 'testbranch-server-ts',
+    env: process.env.VERCEL ? 'vercel' : 'local',
+    time: new Date().toISOString(),
+  });
 });
+
+// رسالة نصية على الجذر /
+app.get('/', (_req, res) => {
+  res.type('text/plain').status(200)
+     .send('✅ Project deployed successfully on Vercel (Express + TS)');
+});
+
 
 app.post('/auth/:model', async (req, res) => {
     try {
